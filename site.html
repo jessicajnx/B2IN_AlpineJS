@@ -11,10 +11,7 @@
 
     <title>ComputerMania</title>
     <link rel="stylesheet" href="style.css">
-
-
 </head>
-
 <body>
     <main x-data="login">
         <form class="form" x-on:submit="submitHandler">
@@ -39,16 +36,13 @@
 
             </section>
         </form>
-        <p x-text="message_login"></p><button x-on:click="transiLoginSignup">ici</button>
-<template x-teleport="body">
+        <p x-text="message_login"></p><button x-on:click="() => transiLoginSignup()">ici</button>
+    <template x-teleport="body">
         <div class="popup" role="dialog" x-show="showPopup" x-transition.duration.1000ms>
             <p x-text="popupMessage"></p>
         </div>
     </template>
-
     </main>
-
-
     <script src="main.js" type="module"></script>
 </body>
 </html>
