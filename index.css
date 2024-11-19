@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333;
+}
+
+#photo_harperlee {
+    display: block;
+    margin: 20px auto;
+    width: 300px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+}
+
+#presentation_livre, #happywoman {
+    margin: 20px auto;
+    max-width: 800px;
+    text-align: justify;
+}
+
+#message-section {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#message-section h3 {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+#message-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#user-message {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+#message-form button {
+    width: 150px;
+    padding: 10px;
+    font-size: 16px;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+#message-form button:hover {
+    background: #555;
+}
+
+#message-list {
+    margin-top: 20px;
+    padding: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f4f4f9; 
+    color: #333; 
+    padding: 15px 20px;
+    border-bottom: 2px solid #ddd; 
+    font-family: 'Georgia', serif; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#navbar #site-name {
+    font-size: 24px;
+    font-weight: bold;
+    font-style: italic;
+    color: #333;
+}
+
+#navbar #user-options a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #555; 
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#navbar #user-options a:hover {
+    background-color: #e0e0e5; 
+    color: #333;
+}
+
+#navbar #user-options a:first-child {
+    border-right: 1px solid #ddd;
+    padding-right: 15px;
+}
