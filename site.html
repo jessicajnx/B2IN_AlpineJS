@@ -13,7 +13,7 @@
     <!--<link rel="stylesheet" href="./styles/style.css">-->
 </head>
 <body>
-    <main x-data="login">
+    <main x-data="login" x-init="console.log('Composant initialisé')">
         <form class="form" x-on:submit="submitHandler">
             <section class="form_fields">
                 <template x-for="field in fields">
@@ -42,6 +42,7 @@
             <p x-text="popupMessage"></p>
         </div>
     </template>
+    <section x-ignore><p>Section à ignorer</p></section>
     </main>
     <script src="./scripts/main.js" type="module"></script>
 </body>
