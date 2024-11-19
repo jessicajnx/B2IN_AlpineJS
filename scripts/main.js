@@ -1,4 +1,4 @@
-import Alpine from './node_modules/alpinejs/dist/module.esm.js'
+import Alpine from 'alpinejs/dist/module.esm.js'
  
 window.Alpine = Alpine
 let login_bool = false;
