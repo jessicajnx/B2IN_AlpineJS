@@ -9,15 +9,7 @@
     <nav id="navbar">
         <div id="site-name">PosteTonLivre!</div>
         <div id="user-options">
-            <template x-if="!isLoggedIn">
-                <button id="login" x-on:click="togglePopup">Inscription/Connexion</button>
-            </template>
-            <template x-if="isLoggedIn">
-                <div>
-                    <span>Bienvenue, <span x-text="username"></span>!</span>
-                    <button x-on:click="logout">Déconnexion</button>
-                </div>
-            </template>
+            <a href="site.html" id="login">Inscription/Connexion</a>
         </div>
     </nav>
     
@@ -63,17 +55,7 @@ contraire, ceux qui le bénissent pour traiter les Hommes également, peu import
         </div>
     </div>
 
-    <div class="popup" x-show="showPopup" x-transition x-cloak>
-        <div class="popup-content">
-            <button class="close-btn" x-on:click="togglePopup">X</button>
-            <h3>Inscription/Connexion</h3>
-            <form x-on:submit.prevent="loginUser">
-                <input type="text" placeholder="Nom d'utilisateur" x-model="form.username" required>
-                <input type="password" placeholder="Mot de passe" x-model="form.password" required>
-                <button type="submit">Valider</button>
-            </form>
-        </div>
-    </div>
+    
     
     <script>
         const messageForm = document.getElementById('message-form');
@@ -102,39 +84,6 @@ contraire, ceux qui le bénissent pour traiter les Hommes également, peu import
             }
         });
     </script>
-
-<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js" defer></script>
-<script>
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('appData', () => ({
-            isLoggedIn: false,
-            username: '',
-            showPopup: false,
-            form: {
-                username: '',
-                password: ''
-            },
-            togglePopup() {
-                this.showPopup = !this.showPopup;
-            },
-            loginUser() {
-                if (this.form.username && this.form.password) {
-                    this.isLoggedIn = true;
-                    this.username = this.form.username;
-                    this.showPopup = false;
-                    this.form.username = '';
-                    this.form.password = '';
-                } else {
-                    alert('Veuillez remplir tous les champs.');
-                }
-            },
-            logout() {
-                this.isLoggedIn = false;
-                this.username = '';
-            }
-        }));
-    });
-</script>
     
 
 </body>
