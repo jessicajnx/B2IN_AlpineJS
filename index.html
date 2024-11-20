@@ -56,7 +56,33 @@ contraire, ceux qui le bénissent pour traiter les Hommes également, peu import
             <p>Aucun message pour le moment. Soyez le premier à partager votre avis !</p>
         </div>
     </p>
-
+    <script>
+        const messageForm = document.getElementById('message-form');
+        const userMessage = document.getElementById('user-message');
+        const messageList = document.getElementById('message-list');
+    
+        messageForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+    
+            const newMessage = userMessage.value.trim();
+    
+            if (newMessage) {
+                const defaultMessage = messageList.querySelector('p');
+                if (defaultMessage && defaultMessage.textContent.includes('Aucun message pour le moment')) {
+                    defaultMessage.remove();
+                }
+    
+                const messageElement = document.createElement('p');
+                messageElement.textContent = newMessage;
+    
+                messageList.prepend(messageElement);
+    
+                userMessage.value = '';
+            } else {
+                alert('Veuillez écrire un message avant de l\'envoyer.');
+            }
+        });
+    </script>
     <div x-show="showPopup" x-transition:enter="transition transform ease-out duration-300"
         x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
         x-transition:leave="transition transform ease-in duration-200" x-transition:leave-start="opacity-100 scale-100"
