@@ -20,7 +20,6 @@ Alpine.data('login', () => ({
     ],
     submitHandler(event){
         event.preventDefault()
-        console.log('formulaire soumis')
         try{
             if (login_bool){
                 const emailValue = document.getElementById('#email').value
@@ -43,7 +42,8 @@ Alpine.data('login', () => ({
         }
     },
     transiLoginSignup(event) {
-        login_bool = !login_bool;
+        try{
+            login_bool = !login_bool;
         if(login_bool){
             this.message_login = "Déjà inscrit ? Cliquez";
             this.fields = [
@@ -87,6 +87,9 @@ Alpine.data('login', () => ({
                     placeholder: 'Entrez votre mot de passe'
                 }
             ];
+        }
+        } catch (error){
+            console.log('Erreur lors du changement de formulaire :', error)
         }
     }}
 ));
