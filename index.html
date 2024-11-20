@@ -45,7 +45,6 @@
         </div>
     </p>
 
-    <!-- Popup modal for login -->
     <div x-show="showPopup" x-transition:enter="transition transform ease-out duration-300"
         x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
         x-transition:leave="transition transform ease-in duration-200" x-transition:leave-start="opacity-100 scale-100"
@@ -53,7 +52,6 @@
         <div class="popup-content">
             <button x-on:click="showPopup = false" class="close-popup">X</button>
 
-            <!-- Form content -->
             <form class="form" x-on:submit="submitHandler">
                 <section class="form_fields">
                     <template x-for="field in fields">
@@ -71,7 +69,7 @@
             </form>
 
             <p x-text="message_login"></p>
-            <button x-on:click="transiLoginSignup">Changer</button>
+            <button x-on:click="transiLoginSignup">ici</button>
         </div>
     </div>
 

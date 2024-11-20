@@ -28,7 +28,6 @@ Alpine.data('login', () => ({
             let prenomValue = document.querySelector('#prenom') ? document.querySelector('#prenom').value : undefined;
             let nomValue = document.querySelector('#nom') ? document.querySelector('#nom').value : undefined;
 
-            // Validation du formulaire
             this.showPopup = !(emailValue && passwordValue && (login_bool ? (prenomValue && nomValue) : true));
             this.popupMessage = this.showPopup ? "Veuillez compléter le formulaire" : "";
         } catch (error) {
