@@ -1,6 +1,7 @@
 import Alpine from './node_modules/alpinejs/dist/module.esm.js'
 
 window.Alpine = Alpine
+
 let login_bool = false;
 
 Alpine.data('login', () => ({
@@ -15,21 +16,21 @@ Alpine.data('login', () => ({
         },
         {
             name: 'password',
-            type: 'password', 
+            type: 'password',
             placeholder: 'Entrez votre mot de passe'
         }
     ],
     submitHandler(event) {
-        event.preventDefault()
+        event.preventDefault();
         try {
-            const emailValue = document.getElementById('#email').value;
+            const emailValue = document.getElementById('email').value;
             const passwordValue = document.querySelector('#password').value;
             let prenomValue = document.querySelector('#prenom') ? document.querySelector('#prenom').value : undefined;
             let nomValue = document.querySelector('#nom') ? document.querySelector('#nom').value : undefined;
 
+            // Validation du formulaire
             this.showPopup = !(emailValue && passwordValue && (login_bool ? (prenomValue && nomValue) : true));
             this.popupMessage = this.showPopup ? "Veuillez compléter le formulaire" : "";
-
         } catch (error) {
             console.log('Erreur lors de la soumission du formulaire :', error);
         }
@@ -39,11 +40,11 @@ Alpine.data('login', () => ({
             login_bool = !login_bool;
 
             this.message_login = login_bool ? "Déjà inscrit ? Cliquez" : "Pas encore inscrit ? Cliquez";
-            this.fields = login_bool 
+            this.fields = login_bool
                 ? [
                     { name: 'email', type: 'email', placeholder: 'Entrez votre email' },
-                    { name: 'nom', type: 'nom', placeholder: 'Entrez votre nom' },
-                    { name: 'prenom', type: 'prenom', placeholder: 'Entrez votre prénom' },
+                    { name: 'nom', type: 'text', placeholder: 'Entrez votre nom' },
+                    { name: 'prenom', type: 'text', placeholder: 'Entrez votre prénom' },
                     { name: 'password', type: 'password', placeholder: 'Entrez votre mot de passe' },
                     { name: 'password_confirm', type: 'password', placeholder: 'Confirmez votre mot de passe' }
                 ]
@@ -57,4 +58,4 @@ Alpine.data('login', () => ({
     }
 }));
 
-Alpine.start()
+Alpine.start();

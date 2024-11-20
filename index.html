@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,40 +10,29 @@
     <nav id="navbar">
         <div id="site-name">PosteTonLivre!</div>
         <div id="user-options">
-            <a href="site.html" id="login">Inscription/Connexion</a>
+            <button x-on:click="showPopup = true" id="login">Inscription/Connexion</button>
         </div>
     </nav>
-    
+
 </head>
 
-<body>
-    <h1> Blog de Livres </h1>
+<body x-data="login">
 
-    <h2> Ne tirez pas sur l'oiseau moqueur </h2>
+    <h1>Blog de Livres</h1>
+
+    <h2>Ne tirez pas sur l'oiseau moqueur</h2>
 
     <img id="photo_harperlee" src="./images/harperlee.png" alt="Photo de la couverture du livre">
 
-    <p id="presentation_livre"> Ne tirez pas sur l'oiseau moqueur (titre original : To Kill a Mockingbird) est un roman de la romancière américaine 
-        Harper Lee. Il est publié en 1960 et remporte le prix Pulitzer l'année suivante. Il a été traduit en français par 
-        Hélène Monod et publié en 1962. Il est considéré comme un classique de la littérature américaine du XXe siècle. </p>
-
-</br>
-    <p id="happywoman"> Vous avez aimer le roman ?
-    </br>
-</br> Perso, j'ai adoré ! je vous le recommande vivement ! Il traite de racisme, de procès, mais touche également à 
-    l'enfance et à l'innocence. Le personnage de Scout m'a beaucoup touché. Mais j'ai également énormément aimé son père, Atticus,
-    et leur voisin qui se cache, Boo Radley.
-    </br> J'avais entendu parler du procès mais je ne savais pas trop quand il aurait lieu, et j'ai été surprise de voir qu'il
-    n'était pas le sujet principal du livre. Il est évoqué plutôt tard dans le livre.
-</br>
-</br> Il n'empêche que j'ai pleuré lorsque Scout et son frère, Jem, assistent au procès et qu'ils sont choqués de ce qu'ils entendent.
-Ils voient toutes ces personnages qui insultent leur père pour défendre quelqu'un d'une couleur de peau différente. Et, au 
-contraire, ceux qui le bénissent pour traiter les Hommes également, peu importe leur couleur de peau.
-</br>
-    </br> Et vous, qu'en avez-vous pensé ?
+    <p id="presentation_livre">
+        Ne tirez pas sur l'oiseau moqueur (titre original : To Kill a Mockingbird) est un roman de la romancière américaine
+        Harper Lee. Il est publié en 1960 et remporte le prix Pulitzer l'année suivante. Il a été traduit en français par
+        Hélène Monod et publié en 1962. Il est considéré comme un classique de la littérature américaine du XXe siècle.
     </p>
 
-    <div id="message-section">
+    <p id="happywoman">Vous avez aimé le roman ?</p>
+
+    <p id="message-section">
         <h3>Laissez votre avis :</h3>
         <form id="message-form">
             <textarea id="user-message" placeholder="Écrivez votre message ici..." required></textarea>
@@ -51,40 +41,41 @@ contraire, ceux qui le bénissent pour traiter les Hommes également, peu import
 
         <h3>Messages précédents :</h3>
         <div id="message-list">
-            <p>Aucun message pour le moment. Soyez le premier à partager votre avis !</p> <!-- faire ça en js avec sa logique pour que le msg change en fonction de s'il y a des msg ou pas -->
+            <p>Aucun message pour le moment. Soyez le premier à partager votre avis !</p>
+        </div>
+    </p>
+
+    <!-- Popup modal for login -->
+    <div x-show="showPopup" x-transition:enter="transition transform ease-out duration-300"
+        x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition transform ease-in duration-200" x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-90" class="popup-overlay">
+        <div class="popup-content">
+            <button x-on:click="showPopup = false" class="close-popup">X</button>
+
+            <!-- Form content -->
+            <form class="form" x-on:submit="submitHandler">
+                <section class="form_fields">
+                    <template x-for="field in fields">
+                        <article>
+                            <label :for="field.name"></label>
+                            <input :id="field.name" :type="field.type ? field.type : 'text'" :placeholder="field.placeholder" required aria-required="true" />
+                        </article>
+                    </template>
+                </section>
+
+                <section class="form_buttons">
+                    <button type="submit">Valider</button>
+                    <button type="reset">Réinitialiser</button>
+                </section>
+            </form>
+
+            <p x-text="message_login"></p>
+            <button x-on:click="transiLoginSignup">Changer</button>
         </div>
     </div>
 
-    
-    
-    <script>
-        const messageForm = document.getElementById('message-form');
-        const userMessage = document.getElementById('user-message');
-        const messageList = document.getElementById('message-list');
-    
-        messageForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-    
-            const newMessage = userMessage.value.trim();
-    
-            if (newMessage) {
-                const defaultMessage = messageList.querySelector('p');
-                if (defaultMessage && defaultMessage.textContent.includes('Aucun message pour le moment')) {
-                    defaultMessage.remove();
-                }
-    
-                const messageElement = document.createElement('p');
-                messageElement.textContent = newMessage;
-    
-                messageList.prepend(messageElement);
-    
-                userMessage.value = '';
-            } else {
-                alert('Veuillez écrire un message avant de l\'envoyer.');
-            }
-        });
-    </script>
-    
-
+    <script src="main.js" type="module"></script>
 </body>
+
 </html>
