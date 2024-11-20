@@ -1,4 +1,4 @@
-import Alpine from 'alpinejs/dist/module.esm.js'
+import Alpine from './node_modules/alpinejs/dist/module.esm.js'
  
 window.Alpine = Alpine
 let login_bool = false;
@@ -18,34 +18,24 @@ Alpine.data('login', () => ({
             placeholder: 'Entrez votre mot de passe'
         }
     ],
-    submitHandler(event) {
-        event.preventDefault();
-        console.log('Formulaire soumis');
-    
-        try {
-            const emailValue = document.getElementById('email').value;
-            const passwordValue = document.querySelector('#password').value;
-            const prenomValue = login_bool ? document.querySelector('#prenom').value : null;
-            const nomValue = login_bool ? document.querySelector('#nom').value : null;
-    
-            this.showPopup = login_bool 
-                ? !(emailValue && passwordValue && prenomValue && nomValue)
-                : !(emailValue && passwordValue);
-    
-            this.popupMessage = this.showPopup 
-                ? "Veuillez compléter le formulaire" 
-                : "Formulaire soumis avec succès";
-    
-            if (!this.showPopup) {
-                console.log('Formulaire soumis avec succès');
-            } else {
-                console.warn('Le formulaire est incomplet');
-            }
-    
-        } catch (error) {
-            console.error('Erreur lors de la soumission du formulaire :', error);
-            this.popupMessage = "Une erreur est survenue, veuillez réessayer.";
-            this.showPopup = true;
+    submitHandler(event){
+        event.preventDefault()
+        console.log('formulaire soumis')
+        if (login_bool){
+            const emailValue = document.getElementById('#email').value
+            const passwordValue = document.querySelector('#password').value
+            const prenomValue = document.querySelector('#prenom').value
+            const nomValue = document.querySelector('#nom').value
+        if(!(emailValue && passwordValue && prenomValue && nomValue)){
+            this.showPopup = true
+            this.popupMessage = "Veuillez compléter le formulaire"
+        }
+        }
+        const emailValue = document.getElementById('#email').value
+        const passwordValue = document.querySelector('#password').value
+        if(!(emailValue && passwordValue)){
+            this.showPopup = true
+            this.popupMessage = "Veuillez compléter le formulaire"
         }
     },
     transiLoginSignup(event) {

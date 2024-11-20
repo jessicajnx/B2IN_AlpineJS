@@ -4,16 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Blog pour lecteurs">
-    <meta name="author" content="Antoine ROCQ & Jessica JAUNAUX">
-    <meta name="keywords" content="books, blog">
+    <meta name="description" content="application de ..">
+    <meta name="author" content="jj">
+    <meta name="keywords" content="computers, france, ordinateurs">
     <meta name="robots" content="index, follow">
 
     <title>ComputerMania</title>
-    <!--<link rel="stylesheet" href="./styles/style.css">-->
+    <link rel="stylesheet" href="style.css">
+
+
 </head>
+
 <body>
-    <main x-data="login" x-init="console.log('Composant initialisé')">
+    <main x-data="login">
         <form class="form" x-on:submit="submitHandler">
             <section class="form_fields">
                 <template x-for="field in fields">
@@ -31,19 +34,21 @@
             </section>
 
             <section class="form_buttons">
-                <button type="submit">Valider</button>
-                <button type="reset">Réinitialiser</button>
+                <button type="submit">valider</button>
+                <button type="reset">réinitialiser</button>
 
             </section>
         </form>
-        <p x-text="message_login"></p><button x-on:click="() => transiLoginSignup()">ici</button>
-    <template x-teleport="body">
+        <p x-text="message_login"></p><button x-on:click="transiLoginSignup">ici</button>
+<template x-teleport="body">
         <div class="popup" role="dialog" x-show="showPopup" x-transition.duration.1000ms>
             <p x-text="popupMessage"></p>
         </div>
     </template>
-    <section x-ignore><p>Section à ignorer</p></section>
+
     </main>
-    <script src="./scripts/main.js" type="module"></script>
+
+
+    <script src="main.js" type="module"></script>
 </body>
 </html>
