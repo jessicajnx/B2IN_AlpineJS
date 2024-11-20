@@ -21,21 +21,25 @@ Alpine.data('login', () => ({
     submitHandler(event){
         event.preventDefault()
         console.log('formulaire soumis')
-        if (login_bool){
+        try{
+            if (login_bool){
+                const emailValue = document.getElementById('#email').value
+                const passwordValue = document.querySelector('#password').value
+                const prenomValue = document.querySelector('#prenom').value
+                const nomValue = document.querySelector('#nom').value
+            if(!(emailValue && passwordValue && prenomValue && nomValue)){
+                this.showPopup = true
+                this.popupMessage = "Veuillez compléter le formulaire"
+            }
+            }
             const emailValue = document.getElementById('#email').value
             const passwordValue = document.querySelector('#password').value
-            const prenomValue = document.querySelector('#prenom').value
-            const nomValue = document.querySelector('#nom').value
-        if(!(emailValue && passwordValue && prenomValue && nomValue)){
-            this.showPopup = true
-            this.popupMessage = "Veuillez compléter le formulaire"
-        }
-        }
-        const emailValue = document.getElementById('#email').value
-        const passwordValue = document.querySelector('#password').value
-        if(!(emailValue && passwordValue)){
-            this.showPopup = true
-            this.popupMessage = "Veuillez compléter le formulaire"
+            if(!(emailValue && passwordValue)){
+                this.showPopup = true
+                this.popupMessage = "Veuillez compléter le formulaire"
+            }
+        } catch (error){
+            console.log('Erreur lors de la soumission du formulaire :', error)
         }
     },
     transiLoginSignup(event) {
