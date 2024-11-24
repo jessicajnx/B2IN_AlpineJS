@@ -10,9 +10,30 @@ Alpine.store('auth', {
     // Utilisation de persist pour conserver l'état
     //login_bool: Alpine.$persist(false),
     login_bool: false,
+    loggedInUser: null, 
     toggleLoginBool() {
         this.login_bool = !this.login_bool;
-    }
+    },
+
+    login(user) { 
+        this.login_bool = true;
+        this.loggedInUser = user; 
+        localStorage.setItem('loggedInUser', JSON.stringify(user)); 
+    },
+
+    logout() { 
+        this.login_bool = false;
+        this.loggedInUser = null;
+        localStorage.removeItem('loggedInUser'); 
+    },
+
+    loadUserFromStorage() { 
+        const storedUser = JSON.parse(localStorage.getItem('loggedInUser'));
+        if (storedUser) {
+            this.login_bool = true;
+            this.loggedInUser = storedUser;
+        }
+    },
 });
 
 Alpine.data('login', () => ({
@@ -22,6 +43,10 @@ Alpine.data('login', () => ({
     fields: [],
     init() {
         this.updateFields();
+        Alpine.store('auth').loadUserFromStorage(); 
+        if (Alpine.store('auth').login_bool) { 
+            window.location.href = './index.html'; 
+        }
     },
     updateFields() {
         this.message_login = Alpine.store('auth').login_bool
@@ -51,6 +76,81 @@ Alpine.data('login', () => ({
         const formatvalidatorservice = new FormatValidatorService()
         const isEmailValid = formatvalidatorservice.emailValidator(emailValue)
         const isPasswordValid = formatvalidatorservice.passwordValidator(pwdValue)
+
+        if (!isEmailValid || !isPasswordValid) {
+            alert("Email ou mot de passe invalide.");
+            return;
+        }
+
+        fetchUsers().then(users => {
+            const foundUser = users.find(user => user.email === emailValue && user.password === pwdValue);
+        
+            if (foundUser) {
+                Alpine.store('auth').login(foundUser); 
+                alert(`Bienvenue, ${foundUser.name} !`);
+                window.location.href = './index.html'; 
+            } else if (!Alpine.store('auth').login_bool) {
+                alert("Utilisateur non trouvé. Vérifiez vos identifiants ou inscrivez-vous.");
+            }
+            
+        });
+
+        fetch('http://localhost:3000/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email: emailValue,
+                password: pwdValue,
+                name: nameValue,
+            }),
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    return response.json().then(err => {
+                        throw new Error(err.error);
+                    });
+                }
+            })
+            .then(data => {
+                alert(data.message); 
+                window.location.href = './index.html'; 
+            })
+            .catch(err => {
+                alert(`Erreur : ${err.message}`);
+            });
+    
+
+        async function fetchUsers() {
+            try {
+                const response = await fetch('./users.json'); 
+                if (!response.ok) {
+                    throw new Error("Erreur lors du chargement des utilisateurs."); 
+                }
+                return await response.json(); 
+            } catch (error) {
+                console.error("Erreur :", error);
+                return []; 
+            }
+        }
+
+
+        if (foundUser) {
+            Alpine.store('auth').login(foundUser); 
+            alert(`Bienvenue, ${foundUser.name} !`);
+            window.location.href = './index.html'; 
+        } else if (!Alpine.store('auth').login_bool) {
+            alert("Utilisateur non trouvé. Inscription simulée.");
+            const newUser = { email: emailValue, password: pwdValue, name: "Nouvel Utilisateur" };
+            fakeUsersDB.push(newUser);
+            Alpine.store('auth').login(newUser);
+            alert("Inscription réussie !");
+            window.location.href = './index.html';
+        }
+
         try {
             formatvalidatorservice.passwordValidator(pwdValue)
         } catch(err) {
