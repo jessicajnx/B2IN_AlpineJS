@@ -1,6 +1,5 @@
 import Alpine from './node_modules/alpinejs/dist/module.esm.js';
 import FormatValidatorService from './FormatValidatorService.js';
-import Alpine from './login.js';
 //import persist from '@alpinejs/persist';
 
 //Alpine.plugin(persist);
