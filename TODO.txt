@@ -1,0 +1,30 @@
+npm install @alpinejs/persist
+npm install eslint --save-dev
+npx eslint --init
+npm install --save-dev prettier
+
+.prettierrc -->
+{
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 4
+}
+puis npx prettier --write *.js *.html
+
+.eslintrc.json -->
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-unused-vars": "warn",
+    "semi": ["error", "always"]
+  }
+}
+Utilisation de formateur, ESLINT et Plugin

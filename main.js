@@ -66,5 +66,13 @@ Alpine.data('login', () => ({
         window.prompt(`email: ${emailValue} et mot de passe ${pwdValue}`) 
     }
 }));
+Alpine.directive('validate-email', (el) => {
+    el.addEventListener('blur', () => {
+        const regex = /^[\w.]{3,30}@[a-z]{1,10}\.[a-z]{2,3}$/;
+        if (!regex.test(el.value)) {
+            alert("Email invalide !");
+        }
+    });
+});
 
 Alpine.start();

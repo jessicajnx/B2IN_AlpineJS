@@ -10,7 +10,7 @@
     <nav id="navbar">
         <div id="site-name">PosteTonLivre!</div>
         <div id="user-options">
-            <button x-on:click="showPopup = true" id="login">Inscription/Connexion</button>
+            <button id="login" x-on:click="showPopup = true" aria-label="Ouvrir le formulaire de connexion">Inscription/Connexion</button>
         </div>
     </nav>
 
@@ -95,17 +95,23 @@ contraire, ceux qui le bénissent pour traiter les Hommes également, peu import
                     <template x-for="field in fields">
                         <article>
                             <label :for="field.name"></label>
-                            <input :id="field.name" :type="field.type ? field.type : 'text'" :placeholder="field.placeholder" required aria-required="true" />
+                            <input 
+                                :id="field.name" 
+                                :type="field.type ? field.type : 'text'" 
+                                :placeholder="field.placeholder" 
+                                required 
+                                aria-required="true" 
+                                x-validate-email
+                            />
                         </article>
                     </template>
                 </section>
-
+            
                 <section class="form_buttons">
                     <button type="submit">Valider</button>
                     <button type="reset">Réinitialiser</button>
                 </section>
-            </form>
-
+            </form>            
             <p x-text="message_login"></p>
             <button x-on:click="transiLoginSignup">ici</button>
         </div>
