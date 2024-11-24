@@ -1,4 +1,5 @@
 import Alpine from './node_modules/alpinejs/dist/module.esm.js';
+import FormatValidatorService from './FormatValidatorService.js';
 //import persist from '@alpinejs/persist';
 
 //Alpine.plugin(persist);
@@ -42,6 +43,27 @@ Alpine.data('login', () => ({
     transiLoginSignup(event) {
         Alpine.store('auth').toggleLoginBool();
         this.updateFields();
+    },
+    submitHandler(event) {
+        event.preventDefault();
+        const pwdValue = document.getElementById("password").value;
+        const emailValue = document.querySelector("#email").value;
+        const formatvalidatorservice = new FormatValidatorService()
+        const isEmailValid = formatvalidatorservice.emailValidator(emailValue)
+        const isPasswordValid = formatvalidatorservice.passwordValidator(pwdValue)
+        try {
+            formatvalidatorservice.passwordValidator(pwdValue)
+        } catch(err) {
+            alert(err)
+        }
+
+        const regexMail = new RegExp(/[\w.]{3,30}[@]{1}[a-z]{1,10}[.]{1}[a-z]{2,3}/, "ig")
+        const isEmailValidRegex = regexMail.test(emailValue)
+        if(isEmailValid) {
+            alert("good")
+            return
+        }
+        window.prompt(`email: ${emailValue} et mot de passe ${pwdValue}`) 
     }
 }));
 
