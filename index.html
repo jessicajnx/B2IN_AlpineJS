@@ -51,6 +51,10 @@ contraire, ceux qui le bénissent pour traiter les Hommes également, peu import
             <button type="submit">Envoyer</button>
         </form>
 
+        <div id="highlight-section">
+            <h3>Dernier avis publié :</h3>
+            <div id="highlight-message">
+
         <h3>Messages précédents :</h3>
         <div id="message-list">
             <p>Aucun message pour le moment. Soyez le premier à partager votre avis !</p>
@@ -76,6 +80,8 @@ contraire, ceux qui le bénissent pour traiter les Hommes également, peu import
                 messageElement.textContent = newMessage;
     
                 messageList.prepend(messageElement);
+
+                highlightMessage.innerHTML = `<p>${newMessage}</p>`;
     
                 userMessage.value = '';
             } else {

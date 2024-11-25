@@ -206,3 +206,21 @@ h1, h2 {
 #navbar #user-options button:active {
     background-color: #d1d1d6;
 }
+
+#highlight-section {
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+    background: pink;
+    border: 1px solid #ffecb3;
+    border-radius: 8px;
+}
+
+#highlight-section h3 {
+    color: black;
+}
+
+#highlight-message p {
+    font-style: italic;
+    color: #555;
+}
