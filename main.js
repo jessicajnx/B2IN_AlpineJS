@@ -168,11 +168,12 @@ Alpine.data('login', () => ({
 }));
 Alpine.directive('validate-email', (el) => {
     el.addEventListener('blur', () => {
-        const regex = /^[\w.]{3,30}@[a-z]{1,10}\.[a-z]{2,3}$/;
-        if (!regex.test(el.value)) {
+        const regex = /^[a-zA-Z0-9._%+-]{3,30}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (el.value.trim() !== "" && !regex.test(el.value)) {
             alert("Email invalide !");
         }
     });
 });
+
 
 Alpine.start();
